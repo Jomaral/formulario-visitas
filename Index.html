@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Captura de ubicación para formulario</title>
+    <script>
+        function obtenerUbicacion() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    // Reemplaza la URL por la de tu formulario
+                    const formularioURL = "https://docs.google.com/forms/d/e/1FAIpQLSfowk7k_pIwtfXUUALHk_0UjB2ZNwJJEf_joGBHjfryChjRog/viewform?usp=dialog";
+                    const urlConUbicacion = `${formularioURL}&entry.1465969180=${lat},${lng}`;
+                    window.location.href = urlConUbicacion;
+                }, function(error) {
+                    alert("No se pudo obtener la ubicación");
+                    console.error(error);
+                });
+            } else {
+                alert("La geolocalización no es compatible con este dispositivo");
+            }
+        }
+        window.onload = obtenerUbicacion;
+    </script>
+</head>
+<body>
+    <p>Obteniendo ubicación y redirigiendo al formulario...</p>
+</body>
+</html>
